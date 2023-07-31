@@ -3,6 +3,7 @@ package BUS;
 
 import DAL.LichHenDAL;
 import DTO.LichHenDTO;
+import java.sql.Date;
 
 import java.util.List;
 
@@ -22,4 +23,7 @@ public class LichHenBUS {
     public static boolean xoaLichHen(String maLichHen) {
         return LichHenDAL.xoaLichHen(maLichHen);
     }
+     public static List<LichHenDTO> layDanhSachLichHenTheoNhaSiVaThoiGian(String maNhaSi, Date startDate, Date endDate){
+     return LichHenDAL.layDanhSachLichHenTheoNhaSiVaThoiGian(maNhaSi, startDate, endDate);
+     }
 }

@@ -6,6 +6,7 @@ package GUI;
 
 import BUS.NhaSiBUS;
 import DTO.NhaSiDTO;
+import Utils.DangNhapUtils;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,8 +23,15 @@ public class NhaSiGUI extends javax.swing.JPanel {
     public NhaSiGUI() {
         initComponents();
         loadDataToTable();
+        phanQuyen();
     }
-
+   public void phanQuyen() {
+        if (!"QuanTriVien".equals(DangNhapUtils.loaiTaiKhoan)) {
+           btnThem.setEnabled(false);
+           btnSua.setEnabled(false);
+           btnXoa.setEnabled(false);
+        }
+    }
     private void loadDataToTable() {
         DefaultTableModel model = (DefaultTableModel) tableNhaSi.getModel();
         model.setRowCount(0); // Clear existing data from the table

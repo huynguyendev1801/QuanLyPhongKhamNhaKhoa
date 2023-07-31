@@ -87,6 +87,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="menuLichLamViec">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="L&#x1ecb;ch l&#xe0;m vi&#x1ec7;c"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemLichLamViec">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="L&#x1ecb;ch l&#xe0;m vi&#x1ec7;c"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemLichLamViecActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="menuCuocHen">
           <Properties>
             <Property name="text" type="java.lang.String" value="L&#x1ecb;ch h&#x1eb9;n"/>
@@ -98,6 +113,29 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemXemLichHenActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuBaoCao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemBaoCaoDieuTriTrongNgay">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o c&#xe1;c &#x111;i&#x1ec1;u tr&#x1ecb; trong ng&#xe0;y, theo t&#x1eeb;ng b&#xe1;c s&#x129;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemBaoCaoDieuTriTrongNgayActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemBaoCaoCuocHenTrongNgay">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o c&#xe1;c cu&#x1ed9;c h&#x1eb9;n trong ng&#xe0;y theo t&#x1eeb;ng b&#xe1;c s&#x129;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemBaoCaoCuocHenTrongNgayActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

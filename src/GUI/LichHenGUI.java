@@ -15,13 +15,19 @@ import DTO.NhaSiDTO;
 
 import DTO.NhanVienDTO;
 import DTO.ThuocDTO;
+import Utils.DangNhapUtils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.PatternSyntaxException;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class LichHenGUI extends javax.swing.JPanel {
 
@@ -33,6 +39,34 @@ public class LichHenGUI extends javax.swing.JPanel {
         loadDataToTable();
         loadBenhNhan() ;
         loadNhaSi();
+        sapXep();
+        phanQuyen();
+        
+    }
+       public void phanQuyen() {
+        if ("NhaSi" == DangNhapUtils.loaiTaiKhoan) {
+           btnThem.setEnabled(false);
+           btnXoa.setEnabled(false);
+        }
+    }
+    public void sapXep(){
+    txtLoc.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                applyFilter();
+            }
+        });
+    cboLoc.addActionListener(e -> applyFilter());
     }
 private void loadBenhNhan() {
     DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
@@ -54,6 +88,19 @@ private void loadNhaSi() {
         comboBoxModel.addElement(nhasi.getMaNhaSi()); // Add each drug's name to the JComboBox
     }
 }
+ private void applyFilter() {
+        String filterText = txtLoc.getText();
+        int filterColumnIndex = cboLoc.getSelectedIndex();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) tableLichHen.getModel());
+
+        try {
+            // Set the filter to case-insensitive and partial matching
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + filterText, filterColumnIndex));
+            tableLichHen.setRowSorter(sorter);
+        } catch (PatternSyntaxException ex) {
+            // If the filter text has an invalid regex syntax, do nothing
+        }
+    }
     private void loadDataToTable() {
         DefaultTableModel model = (DefaultTableModel) tableLichHen.getModel();
         model.setRowCount(0); // Clear existing data from the table
@@ -97,6 +144,9 @@ private void loadNhaSi() {
         dateChooserThoiGianHen = new com.toedter.calendar.JDateChooser();
         cboBenhNhan = new javax.swing.JComboBox<>();
         txtTinhTrang = new javax.swing.JTextField();
+        txtLoc = new javax.swing.JTextField();
+        cboLoc = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1366, 760));
 
@@ -145,6 +195,10 @@ private void loadNhaSi() {
 
         cboBenhNhan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ", "Khác" }));
 
+        cboLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thời gian hẹn", "Mã bệnh nhân", "Mã nha sĩ", "Phòng khám" }));
+
+        jLabel7.setText("Lọc theo:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,7 +240,15 @@ private void loadNhaSi() {
                 .addGap(151, 151, 151))
             .addGroup(layout.createSequentialGroup()
                 .addGap(78, 78, 78)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(757, 757, 757)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,7 +283,12 @@ private void loadNhaSi() {
                             .addComponent(jLabel6)
                             .addComponent(btnXoa)
                             .addComponent(txtTinhTrang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(80, 80, 80)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
@@ -241,7 +308,6 @@ private void loadNhaSi() {
             return; // Xử lý lỗi nếu có thể
         }
 
-// Chuyển đổi thành java.sql.Date
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         System.out.println(sqlDate);
         String maBenhNhan = (String) cboBenhNhan.getSelectedItem();
@@ -335,6 +401,7 @@ private void loadNhaSi() {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cboBenhNhan;
+    private javax.swing.JComboBox<String> cboLoc;
     private javax.swing.JComboBox<String> cboNhaSi;
     private com.toedter.calendar.JDateChooser dateChooserThoiGianHen;
     private javax.swing.JLabel jLabel1;
@@ -343,8 +410,10 @@ private void loadNhaSi() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableLichHen;
+    private javax.swing.JTextField txtLoc;
     private javax.swing.JTextField txtMaLichHen;
     private javax.swing.JTextField txtPhongKham;
     private javax.swing.JTextField txtTinhTrang;

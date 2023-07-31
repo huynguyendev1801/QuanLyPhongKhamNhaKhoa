@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Utils.DangNhapUtils;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -58,8 +59,13 @@ public class GiaoDienChinhGUI extends javax.swing.JFrame {
         menuItemThuoc = new javax.swing.JMenuItem();
         menuBenhNhan = new javax.swing.JMenu();
         menuItemHoSoBenhNhan = new javax.swing.JMenuItem();
+        menuLichLamViec = new javax.swing.JMenu();
+        menuItemLichLamViec = new javax.swing.JMenuItem();
         menuCuocHen = new javax.swing.JMenu();
         menuItemXemLichHen = new javax.swing.JMenuItem();
+        menuBaoCao = new javax.swing.JMenu();
+        menuItemBaoCaoDieuTriTrongNgay = new javax.swing.JMenuItem();
+        menuItemBaoCaoCuocHenTrongNgay = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -142,6 +148,18 @@ public class GiaoDienChinhGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(menuBenhNhan);
 
+        menuLichLamViec.setText("Lịch làm việc");
+
+        menuItemLichLamViec.setText("Lịch làm việc");
+        menuItemLichLamViec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemLichLamViecActionPerformed(evt);
+            }
+        });
+        menuLichLamViec.add(menuItemLichLamViec);
+
+        jMenuBar1.add(menuLichLamViec);
+
         menuCuocHen.setText("Lịch hẹn");
 
         menuItemXemLichHen.setText("Xem lịch hẹn");
@@ -154,6 +172,26 @@ public class GiaoDienChinhGUI extends javax.swing.JFrame {
 
         jMenuBar1.add(menuCuocHen);
 
+        menuBaoCao.setText("Báo cáo");
+
+        menuItemBaoCaoDieuTriTrongNgay.setText("Báo cáo các điều trị trong ngày, theo từng bác sĩ");
+        menuItemBaoCaoDieuTriTrongNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemBaoCaoDieuTriTrongNgayActionPerformed(evt);
+            }
+        });
+        menuBaoCao.add(menuItemBaoCaoDieuTriTrongNgay);
+
+        menuItemBaoCaoCuocHenTrongNgay.setText("Báo cáo các cuộc hẹn trong ngày theo từng bác sĩ");
+        menuItemBaoCaoCuocHenTrongNgay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemBaoCaoCuocHenTrongNgayActionPerformed(evt);
+            }
+        });
+        menuBaoCao.add(menuItemBaoCaoCuocHenTrongNgay);
+
+        jMenuBar1.add(menuBaoCao);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -161,6 +199,7 @@ public class GiaoDienChinhGUI extends javax.swing.JFrame {
 
     private void menuItemDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDangXuatActionPerformed
         // TODO add your handling code here:
+        DangNhapUtils.loaiTaiKhoan = "";
         this.dispose();
         new DangNhapGUI().setVisible(true);
     }//GEN-LAST:event_menuItemDangXuatActionPerformed
@@ -241,6 +280,47 @@ private LichHenGUI panelLichHen;
         jPanel2.revalidate();
         jPanel2.repaint();
     }//GEN-LAST:event_menuItemXemLichHenActionPerformed
+private BaoCaoDieuTriGUI panelBaoCaoDieuTri;
+    private void menuItemBaoCaoDieuTriTrongNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBaoCaoDieuTriTrongNgayActionPerformed
+        // TODO add your handling code here:
+               panelBaoCaoDieuTri = new BaoCaoDieuTriGUI();
+        this.panelBaoCaoDieuTri.setVisible(true);
+        this.jPanel2.setLayout(new FlowLayout());
+        this.jPanel2.removeAll();
+        this.jPanel2.add(panelBaoCaoDieuTri, BorderLayout.CENTER);
+        this.jPanel2.updateUI();
+
+        // Cập nhật lại giao diện
+        jPanel2.revalidate();
+        jPanel2.repaint();
+    }//GEN-LAST:event_menuItemBaoCaoDieuTriTrongNgayActionPerformed
+private BaoCaoCuocHenGUI panelBaoCaoCuocHen;
+    private void menuItemBaoCaoCuocHenTrongNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBaoCaoCuocHenTrongNgayActionPerformed
+              panelBaoCaoCuocHen = new BaoCaoCuocHenGUI();
+        this.panelBaoCaoCuocHen.setVisible(true);
+        this.jPanel2.setLayout(new FlowLayout());
+        this.jPanel2.removeAll();
+        this.jPanel2.add(panelBaoCaoCuocHen, BorderLayout.CENTER);
+        this.jPanel2.updateUI();
+
+        // Cập nhật lại giao diện
+        jPanel2.revalidate();
+        jPanel2.repaint();
+    }//GEN-LAST:event_menuItemBaoCaoCuocHenTrongNgayActionPerformed
+private LichLamViecGUI panelLichLamViec;
+    private void menuItemLichLamViecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemLichLamViecActionPerformed
+        // TODO add your handling code here:
+             panelLichLamViec = new LichLamViecGUI();
+        this.panelLichLamViec.setVisible(true);
+        this.jPanel2.setLayout(new FlowLayout());
+        this.jPanel2.removeAll();
+        this.jPanel2.add(panelLichLamViec, BorderLayout.CENTER);
+        this.jPanel2.updateUI();
+
+        // Cập nhật lại giao diện
+        jPanel2.revalidate();
+        jPanel2.repaint();
+    }//GEN-LAST:event_menuItemLichLamViecActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,16 +362,21 @@ private LichHenGUI panelLichHen;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenu menuBaoCao;
     private javax.swing.JMenu menuBenhNhan;
     private javax.swing.JMenu menuCuocHen;
+    private javax.swing.JMenuItem menuItemBaoCaoCuocHenTrongNgay;
+    private javax.swing.JMenuItem menuItemBaoCaoDieuTriTrongNgay;
     private javax.swing.JMenuItem menuItemDangXuat;
     private javax.swing.JMenuItem menuItemHoSoBenhNhan;
+    private javax.swing.JMenuItem menuItemLichLamViec;
     private javax.swing.JMenuItem menuItemNhaSi;
     private javax.swing.JMenuItem menuItemNhanVien;
     private javax.swing.JMenuItem menuItemThoat;
     private javax.swing.JMenuItem menuItemThuoc;
     private javax.swing.JMenuItem menuItemTrangChu;
     private javax.swing.JMenuItem menuItemXemLichHen;
+    private javax.swing.JMenu menuLichLamViec;
     private javax.swing.JMenu menuTuyChon;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package GUI;
 import BUS.DangNhapBUS;
 import DTO.DangNhapDTO;
 import Utils.BenhNhanUtils;
+import Utils.DangNhapUtils;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -198,6 +199,7 @@ public class DangNhapGUI extends javax.swing.JFrame {
 
 
         if (login) {
+            DangNhapUtils.loaiTaiKhoan = loaiTaiKhoan;
             GiaoDienChinhGUI mainFrame = new GiaoDienChinhGUI();
             BenhNhanUtils.login = new DangNhapDTO();
             BenhNhanUtils.login.setMa(tenDangNhap);

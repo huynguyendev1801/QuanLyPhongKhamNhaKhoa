@@ -73,6 +73,13 @@ public class ChiTietBenhNhanGUI extends javax.swing.JPanel {
         model.addColumn("Mô tả");
         model.addColumn("Ghi chú");
         model.addColumn("Trạng thái điều trị");
+            tableKeHoachDieuTri.getColumnModel().getColumn(0).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(1).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(2).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(3).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(4).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(5).setCellRenderer(new CustomTableCellRenderer());
+    tableKeHoachDieuTri.getColumnModel().getColumn(6).setCellRenderer(new CustomTableCellRenderer());
         List<KeHoachDieuTriDTO> keHoachDieuTriDTO = BenhNhanUtils.keHoachDieuTriDTO;
 
         for (KeHoachDieuTriDTO keHoachDieuTri : keHoachDieuTriDTO) {

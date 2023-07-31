@@ -7,6 +7,7 @@ package GUI;
 import BUS.ThuocBUS;
 
 import DTO.ThuocDTO;
+import Utils.DangNhapUtils;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,6 +21,15 @@ public class ThuocGUI extends javax.swing.JPanel {
     public ThuocGUI() {
         initComponents();
         loadDataToTable();
+        phanQuyen();
+    }
+
+    public void phanQuyen() {
+        if (!"QuanTriVien".equals(DangNhapUtils.loaiTaiKhoan)) {
+           btnThem.setEnabled(false);
+           btnSua.setEnabled(false);
+           btnXoa.setEnabled(false);
+        }
     }
 
     private void loadDataToTable() {

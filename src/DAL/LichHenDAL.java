@@ -85,4 +85,33 @@ public class LichHenDAL {
         }
         return false;
     }
+    public static List<LichHenDTO> layDanhSachLichHenTheoNhaSiVaThoiGian(String maNhaSi, Date startDate, Date endDate) {
+        List<LichHenDTO> danhSachLichHen = new ArrayList<>();
+
+        try (Connection connection = Database.getConnect();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT MaLichHen, ThoiGianHen, MaBenhNhan, MaNhaSi, PhongKham, TinhTrang FROM LichHen WHERE MaNhaSi = ? AND ThoiGianHen BETWEEN ? AND ?")) {
+
+            preparedStatement.setString(1, maNhaSi);
+            preparedStatement.setDate(2, new java.sql.Date(startDate.getTime()));
+            preparedStatement.setDate(3, new java.sql.Date(endDate.getTime()));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                String maLichHen = resultSet.getString("MaLichHen");
+                Date thoiGianHen = resultSet.getDate("ThoiGianHen");
+                String maBenhNhan = resultSet.getString("MaBenhNhan");
+                String phongKham = resultSet.getString("PhongKham");
+                String tinhTrang = resultSet.getString("TinhTrang");
+
+                LichHenDTO lichHen = new LichHenDTO(maLichHen, thoiGianHen, maBenhNhan, maNhaSi, phongKham, tinhTrang);
+                danhSachLichHen.add(lichHen);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return danhSachLichHen;
+    }
 }
